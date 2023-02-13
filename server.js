@@ -1,4 +1,5 @@
 const express = require("express");
+const path= require('path')
 const app = express();
 const server = require("http").createServer(app);
 const WebSocket = require("ws");
@@ -21,24 +22,18 @@ wss.on("connection", function connection(ws) {
     let index = parseInt(values[0]);
     let value = parseInt(values[1]);
     array[index] = value;
-    //extract the data from the message
-    //update the array
 
     wss.clients.forEach(function each(client) {
       if (client !== ws && client.readyState === WebSocket.OPEN) {
         client.send(message);
       }
     });
-    //update the array
-    // message.text().then((text) => {
-    //   let data = text.split(" ");
-    //   let arr_index = parseInt(data[0]);
-    //   let arr_value = parseInt(data[1]);
-    //   array[arr_index] = arr_value;
-    // });
   });
 });
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname,"/index.html")));
+app.get("/awaker", (req, res) => {
+  res.sendStatus(200)
+})
 
 server.listen(8080, () => console.log(`Lisening on port :8080`));
