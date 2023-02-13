@@ -1,192 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap"
+      rel="stylesheet"
+    />
     <title>MultiUserSketch by Abi</title>
     <style>
-        body {
-            text-align: center;
-            width: 100vw;
-            font-family: 'Just Another Hand', cursive;
-            overflow-x: hidden;
-            overflow-y: hidden;
+      body {
+        width: 100vw;
+        font-family: "Just Another Hand", cursive;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        margin-bottom: 20%;
+      }
+
+      #main {
+        width: 80vw;
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      #board {
+        width: 50vw;
+        height: 50vw;
+        background-color: #fff;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(64, 1fr);
+        gap: 0;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 10px;
+      }
+
+      #board div {
+        background-color: #fff;
+      }
+
+      .navbar {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background-color: #fff;
+        width: 100%;
+      }
+
+      a {
+        color: #0b0b0b;
+        text-decoration: none;
+        font-size: 20px;
+      }
+
+      .btn {
+        background-color: #ffffff;
+        color: #0a0000;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 0.5rem;
+        cursor: pointer;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        margin: 1rem;
+      }
+
+      .btn:hover {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px inset;
+      }
+
+      .navbar div {
+        cursor: pointer;
+        margin: 1rem;
+      }
+
+      .navbar div:hover {
+        transform: scale(1.2);
+      }
+
+      @media screen and (max-width: 600px) {
+        #main {
+          width: 100vw;
+          display: grid;
+          grid-template-columns: 1fr;
+          position: absolute;
         }
 
         #board {
-            width: 100vw;
-            height: 100vw;
-            background-color: #000;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(64, 1fr);
-            gap: 0;
-
-        }
-
-        #board div {
-
-            background-color: #fff;
-            border: 1px solid rgb(171, 216, 191);
-
-
+          width: 90vw;
+          height: 90vw;
+          background-color: #fff;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(64, 1fr);
+          gap: 0;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+          border-radius: 10px;
+          margin-bottom: 50px;
         }
 
         .navbar {
+          display: grid;
+          width: 80vw;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+          text-align: center;
+          margin: 0 auto;
+        }
 
-            overflow: hidden;
-            position: fixed;
-            bottom: 0;
-            width: 100vw;
-            height: 15vh;
+        .btn {
+          padding: 5px;
+          font-size: 0.4 rem;
         }
-        a{
-            color: #0b0b0b;
-            text-decoration: none;
-            font-size: 20px;
+
+        .navbar div {
+          margin: 0.08 rem;
         }
+
+        .navbar p {
+          display: none;
+        }
+
+        .btnh {
+          display: none;
+        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div id="board">
+  <body>
+    <div id="main">
+      <div id="board"></div>
+      <div class="navbar">
+        <div
+          style="
+            background-color: red;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 50%;
+          "
+          onclick="changeMainColor(1)"
+        ></div>
+
+        <div
+          style="
+            background-color: green;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 50%;
+          "
+          onclick="changeMainColor(2)"
+        ></div>
+
+        <div
+          style="
+            background-color: blue;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 50%;
+          "
+          onclick="changeMainColor(3)"
+        ></div>
+
+        <div
+          style="
+            background-color: yellow;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 50%;
+          "
+          onclick="changeMainColor(4)"
+        ></div>
+
+        <button class="btn" onclick="clearAll()">Clear All</button>
+        <button class="btn btnh" onclick="openFullscreen()">Fullscreen</button>
+        <p>Please go fullscreen for the best experience!</p>
+      </div>
     </div>
-    <div class="navbar">
-        <strong> click to choose the color </strong>
-        <div style="background-color:red;width:20px;height:20px;display:inline-block;border-radius:50%;"
-            onclick="changeMainColor(1)"></div>
-        <div style="background-color:green;width:20px;height:20px;display:inline-block;border-radius:50%;"
-            onclick="changeMainColor(2)"></div>
-        <div style="background-color:blue;width:20px;height:20px;display:inline-block;border-radius:50%;"
-            onclick="changeMainColor(3)"></div>
-        <div style="background-color:yellow;width:20px;height:20px;display:inline-block;border-radius:50%;"
-            onclick="changeMainColor(4)"></div>
-            <a href="https://abii.me/" target="_blank"><strong>Abi</strong></a>
-    </div>
-    
 
     <script>
-        let isUpdating = false;
-        let msg_ = 0;
-        let mainColor = "red"
-        let colors = [];
-        const socket = new WebSocket('ws://localhost:8080');
+      let isUpdating = false;
+      let msg_ = 0;
+      let mainColor = "red";
+      let colors = [];
 
-        // Connection opened
-        socket.addEventListener('open', function (event) {
-            console.log('Connected to WS Server')
+      var elem = document.documentElement;
 
-        });
+      /* View in fullscreen */
+      function openFullscreen() {
+        if (elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) {
+          /* Safari */
+          elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+          /* IE11 */
+          elem.msRequestFullscreen();
+        }
+      }
 
-        // Listen for messages
-        socket.addEventListener('message', function (event) {
-            console.log(typeof (message))
-            if (msg_ != 0) {
-                event.data.text().then(
-                    (data) => {
+      const socket = new WebSocket("wss://" + window.location.hostname);
 
-                        let message = data.split(" ");
-                        let id = message[0];
-                        let color = message[1];
-                        let div = document.querySelector(`[data-id="${id}"]`);
-                        if (color == 1) {
-                            div.style.backgroundColor = "red";
-                        }
-                        if (color == 2) {
-                            div.style.backgroundColor = "green";
-                        }
-                        if (color == 3) {
-                            div.style.backgroundColor = "blue";
-                        }
-                        if (color == 4) {
-                            div.style.backgroundColor = "yellow";
-                        }
-                        msg_++;
+      // Connection opened
+      socket.addEventListener("open", function (event) {
+        console.log("Connected to WS Server");
+      });
 
-
-
-                    }
-
-                )
-
+      // Listen for messages
+      socket.addEventListener("message", function (event) {
+        console.log(typeof message);
+        if (msg_ != 0) {
+          event.data.text().then((data) => {
+            let message = data.split(" ");
+            let id = message[0];
+            let color = message[1];
+            let div = document.querySelector(`[data-id="${id}"]`);
+            if (color == 1) {
+              div.style.backgroundColor = "red";
             }
-            else {
-                let values = event.data.split(",");
-                for (let i = 0; i < values.length; i++) {
-                    let div = document.querySelector(`[data-id="${i}"]`);
-                    let color_index=parseInt(values[i]);
-                    if (color_index == 1) {
-                        div.style.backgroundColor = "red";
-                    }
-                    if (color_index == 2) {
-                        div.style.backgroundColor = "green";
-                    }
-                    if (color_index == 3) {
-                        div.style.backgroundColor = "blue";
-                    }
-                    if (color_index == 4) {
-                        div.style.backgroundColor = "yellow";
-                    }
-
-             
-                }
-                msg_ = 1;
-
+            if (color == 2) {
+              div.style.backgroundColor = "green";
             }
+            if (color == 3) {
+              div.style.backgroundColor = "blue";
+            }
+            if (color == 4) {
+              div.style.backgroundColor = "yellow";
+            }
+            msg_++;
+          });
+        } else {
+          let values = event.data.split(",");
+          for (let i = 0; i < values.length; i++) {
+            let div = document.querySelector(`[data-id="${i}"]`);
+            let color_index = parseInt(values[i]);
+            if (color_index == 1) {
+              div.style.backgroundColor = "red";
+            }
+            if (color_index == 2) {
+              div.style.backgroundColor = "green";
+            }
+            if (color_index == 3) {
+              div.style.backgroundColor = "blue";
+            }
+            if (color_index == 4) {
+              div.style.backgroundColor = "yellow";
+            }
+          }
+          msg_ = 1;
+        }
+      });
 
+      const board = document.getElementById("board");
+      for (let i = 0; i < 64 * 64; i++) {
+        const div = document.createElement("div");
+        div.dataset.id = i;
+        board.appendChild(div);
+      }
+      const divs = document.querySelectorAll("#board div");
+      divs.forEach((div) => {
+        div.addEventListener("mouseover", () => {
+          div.style.backgroundColor = mainColor;
+          if (mainColor == "red") {
+            colors[div.dataset.id] = 1;
+          }
+          if (mainColor == "green") {
+            colors[div.dataset.id] = 2;
+          }
+          if (mainColor == "blue") {
+            colors[div.dataset.id] = 3;
+          }
+          if (mainColor == "yellow") {
+            colors[div.dataset.id] = 4;
+          }
 
+          socket.send(div.dataset.id + " " + colors[div.dataset.id]);
         });
-
-        const board = document.getElementById('board');
+      });
+      const changeMainColor = (val) => {
+        if (val == 1) {
+          mainColor = "red";
+        }
+        if (val == 2) {
+          mainColor = "green";
+        }
+        if (val == 3) {
+          mainColor = "blue";
+        }
+        if (val == 4) {
+          mainColor = "yellow";
+        }
+      };
+      const clearAll = () => {
         for (let i = 0; i < 64 * 64; i++) {
-            const div = document.createElement('div');
-            div.dataset.id = i;
-            board.appendChild(div);
+          let div = document.querySelector(`[data-id="${i}"]`);
+          div.style.backgroundColor = "white";
         }
-        const divs = document.querySelectorAll('#board div');
-        divs.forEach(div => {
-            div.addEventListener('mouseover', () => {
-                div.style.backgroundColor = mainColor;
-                if (mainColor == "red") {
-                    colors[div.dataset.id] = 1;
-                }
-                if (mainColor == "green") {
-                    colors[div.dataset.id] = 2;
-                }
-                if (mainColor == "blue") {
-                    colors[div.dataset.id] = 3;
-                }
-                if (mainColor == "yellow") {
-                    colors[div.dataset.id] = 4;
-                }
-
-                socket.send(div.dataset.id + " " + colors[div.dataset.id]);
-
-            })
-        });
-        const changeMainColor = (val) => {
-            if (val == 1) {
-                mainColor = "red";
-            }
-            if (val == 2) {
-                mainColor = "green";
-            }
-            if (val == 3) {
-                mainColor = "blue";
-            }
-            if (val == 4) {
-                mainColor = "yellow";
-            }
-        }
-
-
+      };
     </script>
-
-</body>
-
+  </body>
 </html>
