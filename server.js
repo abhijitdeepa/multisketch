@@ -32,6 +32,9 @@ wss.on("connection", function connection(ws) {
 });
 
 app.get("/", (req, res) => res.sendFile(path.join(__dirname,"/index.html")));
+
+//for cron job, to keep the service active if hosting at free service providers like glitch
+
 app.get("/awaker", (req, res) => {
   res.sendStatus(200)
 })
