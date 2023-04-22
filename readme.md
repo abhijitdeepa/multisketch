@@ -1,5 +1,5 @@
 # Multiuser Sketchpad
-simple working demo of multiuser pixel sketchpad, extremely inefficinet but going to be used as a background style for my portfolio.
+simple working demo of multiuser pixel sketchpad, extremely inefficient but going to be used as a background style for my portfolio.
 Since this is an expermient, it doesn't work on mobile well.
 
 # Live Demo
